@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { UserModule } from './user/user.module';
+import { MediaModule } from './media/media.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseConfigService } from './config/db.config.service';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    UserModule,
+    MediaModule,
     ConfigModule.forRoot({
       isGlobal: true
     }),
