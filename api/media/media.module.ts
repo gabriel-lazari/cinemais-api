@@ -9,5 +9,6 @@ import { MediaRepository } from './media.repository';
   imports: [TypeOrmModule.forFeature([MediaEntity])],
   controllers: [MediaController],
   providers: [MediaService, MediaRepository],
+  exports: [MediaRepository]
 })
-export class MediaModule {}
+export class MediaModule { }

@@ -1,4 +1,4 @@
-import { Entity, Column, CreateDateColumn, UpdateDateColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, CreateDateColumn, UpdateDateColumn, PrimaryGeneratedColumn, Generated } from "typeorm";
 import { MediaType } from './domain/media-type.enum';
 
 @Entity({ name: 'media' })
@@ -11,8 +11,9 @@ export class MediaEntity {
 
     @UpdateDateColumn({ name: 'updated_at' })
     updated_at: string;
-
-    @PrimaryGeneratedColumn('uuid')
+    
+    @Column()
+    @Generated('uuid')
     uuid: string
 
     @Column({ name: 'title', length: 100, nullable: false })

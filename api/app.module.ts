@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MediaModule } from './media/media.module';
 import { UserModule } from './user/user.module';
+import { FavoriteModule } from './favorite/favorite.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseConfigService } from './config/db.config.service';
 import { ConfigModule } from '@nestjs/config';
@@ -9,6 +10,7 @@ import { ConfigModule } from '@nestjs/config';
   imports: [
     MediaModule,
     UserModule,
+    FavoriteModule,
     ConfigModule.forRoot({
       isGlobal: true
     }),
