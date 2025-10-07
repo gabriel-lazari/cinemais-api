@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, NotFoundException, Param, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Get, Param, Post } from '@nestjs/common';
 import { FavoriteService } from './favorite.service';
 import { AddFavoriteDto } from './dto/addFavorite.dto';
 
@@ -8,7 +8,12 @@ export class FavoriteController {
 
     @Post()
     @HttpCode(HttpStatus.NO_CONTENT)
-    async addFavorite(@Param('userId') userId: string, @Body() dto: AddFavoriteDto): Promise<void> {
-        await this.favoriteService.addFavorite(+userId, dto);
+    async create(@Param('userId') userId: string, @Body() dto: AddFavoriteDto) {
+        await this.favoriteService.create(+userId, dto);
+    }
+
+    @Get()
+    async list(@Param('userId') userId: string) {
+        return await this.favoriteService.list(+userId);
     }
 }

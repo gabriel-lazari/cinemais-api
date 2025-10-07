@@ -11,12 +11,31 @@ export class FavoriteRepository {
     private readonly ormRepo: Repository<FavoriteEntity>,
   ) { }
 
-  async addFavorite(userId: number, data: AddFavoriteDto): Promise<void> {
+  async create(userId: number, data: AddFavoriteDto): Promise<void> {
     const favorite = this.ormRepo.create({
       user: { id: userId },
       media: { id: data.mediaId }
     });
 
     await this.ormRepo.save(favorite);
+  }
+
+  async existFavorite(userId: number, data: AddFavoriteDto): Promise<Boolean> {
+    const items = await this.ormRepo.find({
+      where: {
+        user: { id: userId },
+        media: { id: data.mediaId }
+      }
+    });
+
+    return items.length > 0 ? true : false;
+  }
+
+  async list(userId: number): Promise<FavoriteEntity[]> {
+    return await this.ormRepo.find({
+      where: {
+        user: { id: userId }
+      }
+    });
   }
 }

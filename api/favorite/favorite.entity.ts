@@ -26,11 +26,11 @@ export class FavoriteEntity {
     @UpdateDateColumn({ name: 'updated_at' })
     updated_at: Date;
 
-    @ManyToOne(() => UserEntity, { eager: false })
+    @ManyToOne(() => UserEntity, { eager: true })
     @JoinColumn({ name: 'user_id' })
     user: UserEntity;
 
-    @ManyToOne(() => MediaEntity, { eager: false })
+    @ManyToOne(() => MediaEntity, { eager: true })
     @JoinColumn({ name: 'media_id' })
     media: MediaEntity;
 }
