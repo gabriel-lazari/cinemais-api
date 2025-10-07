@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Delete } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { MediaService } from './media.service';
 import { CreateDTO } from './dto/create.dto';
 

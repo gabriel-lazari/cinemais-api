@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MediaModule } from './media/media.module';
+import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseConfigService } from './config/db.config.service';
 import { ConfigModule } from '@nestjs/config';
@@ -7,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     MediaModule,
+    UserModule,
     ConfigModule.forRoot({
       isGlobal: true
     }),

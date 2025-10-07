@@ -11,7 +11,6 @@ async function bootstrap() {
   app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
   app.enableCors({
     origin: ['http://localhost:8080'],
-    
   });
 
   app.useGlobalPipes(
@@ -23,7 +22,7 @@ async function bootstrap() {
   )
 
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
-  
+
   await app.listen(process.env.PORT ?? 3000);
 }
 
