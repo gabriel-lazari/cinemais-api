@@ -23,13 +23,13 @@ export class FavoriteService {
         const media = await this.mediaRepository.findById(data.mediaId);
 
         if (!media) {
-            throw new NotFoundException(`Mídia ${data.mediaId} não encontrada no catálogo`);
+            throw new NotFoundException(`Mídia com id ${data.mediaId} não encontrada no catálogo`);
         }
 
-        const isExistFavorite = await this.favoriteRepository.existFavorite(userId, data);
+        const isExistFavorite = await this.favoriteRepository.existFavorite(userId, data.mediaId);
         
         if (isExistFavorite) {
-            throw new ConflictException(`Esse mídia ${data.mediaId} já é um favorito`);
+            throw new ConflictException(`Esse mídia com id ${data.mediaId} já é um favorito`);
         }
 
         await this.favoriteRepository.create(userId, data);
@@ -37,5 +37,15 @@ export class FavoriteService {
 
     async list(userId: number): Promise<FavoriteEntity[]>  {
         return await this.favoriteRepository.list(userId);
+    }
+
+    async remove(userId: number, mediaId: number): Promise<void> {
+        const isExistFavorite = await this.favoriteRepository.existFavorite(userId, mediaId);
+        
+        if (!isExistFavorite) {
+            throw new NotFoundException(`Não existe mídia ${mediaId} como favorito`);
+        }
+
+        return await this.favoriteRepository.remove(userId, mediaId);
     }
 }

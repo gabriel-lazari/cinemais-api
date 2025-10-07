@@ -20,11 +20,11 @@ export class FavoriteRepository {
     await this.ormRepo.save(favorite);
   }
 
-  async existFavorite(userId: number, data: AddFavoriteDto): Promise<Boolean> {
+  async existFavorite(userId: number, mediaId: number): Promise<Boolean> {
     const items = await this.ormRepo.find({
       where: {
         user: { id: userId },
-        media: { id: data.mediaId }
+        media: { id: mediaId }
       }
     });
 
@@ -32,10 +32,13 @@ export class FavoriteRepository {
   }
 
   async list(userId: number): Promise<FavoriteEntity[]> {
-    return await this.ormRepo.find({
-      where: {
-        user: { id: userId }
-      }
+    return await this.ormRepo.find({ where: { user: { id: userId } } });
+  }
+
+  async remove(userId: number, mediaId: number): Promise<void> {
+    await this.ormRepo.delete({
+      user: { id: userId },
+      media: { id: mediaId }
     });
   }
 }

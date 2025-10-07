@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Get, Param, Post, Delete } from '@nestjs/common';
 import { FavoriteService } from './favorite.service';
 import { AddFavoriteDto } from './dto/addFavorite.dto';
 
@@ -15,5 +15,11 @@ export class FavoriteController {
     @Get()
     async list(@Param('userId') userId: string) {
         return await this.favoriteService.list(+userId);
+    }
+
+    @Delete(':mediaId')
+    @HttpCode(HttpStatus.NO_CONTENT)
+    async remove(@Param('userId') userId: string, @Param('mediaId') mediaId: string): Promise<void> {
+        await this.favoriteService.remove(+userId, +mediaId);
     }
 }
