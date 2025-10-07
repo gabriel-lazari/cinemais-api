@@ -1,48 +1,100 @@
-// src/users/user.service.spec.ts
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserService } from './user.service';
+import { UserRepository } from './user.repository';
 import { CreateUserDto } from './dto/create.user.dto';
+import { UserEntity } from './user.entity';
+import { NotFoundException } from '@nestjs/common';
 
 describe('UserService', () => {
     let service: UserService;
+    let repo: Partial<jest.Mocked<UserRepository>>;
 
     beforeEach(async () => {
+        repo = {
+            create: jest.fn().mockImplementation((dto: CreateUserDto) => ({
+                id: 1,
+                uuid: 'fixed-uuid',
+                name: dto.name,
+                is_active: true,
+                created_at: new Date(),
+                updated_at: new Date(),
+            })),
+            list: jest.fn().mockResolvedValue([
+                {
+                    id: 1,
+                    uuid: 'uuid-1',
+                    name: 'Usuário 1',
+                    is_active: true,
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                },
+                {
+                    id: 2,
+                    uuid: 'uuid-2',
+                    name: 'Usuário 2',
+                    is_active: true,
+                    created_at: new Date(),
+                    updated_at: new Date()
+                }
+            ]),
+            findById: jest.fn()
+        };
+
         const module: TestingModule = await Test.createTestingModule({
-            providers: [UserService],
+            providers: [
+                UserService,
+                { provide: UserRepository, useValue: repo }
+            ],
         }).compile();
 
         service = module.get<UserService>(UserService);
     });
 
-    it('deve estar definido', () => {
-        expect(service).toBeDefined();
+    describe('create()', () => {
+        it('deve criar um usuário', async () => {
+            const dto: CreateUserDto = { name: 'Usuário 1' };
+
+            const result = await service.create(dto);
+
+            expect(result).toHaveProperty('id', 1);
+            expect(result.name).toBe('Usuário 1');
+            expect(repo.create).toHaveBeenCalledWith(dto);
+        });
     });
 
-    it('deve criar um usuário', () => {
-        const dto: CreateUserDto = {
-            name: 'Usuário 1'
-        };
+    describe('list()', () => {
+        it('deve retornar a lista de usuários', async () => {
+            const result = await service.list();
 
-        const result = service.create(dto);
-
-        expect(result).toHaveProperty('id');
+            expect(result).toHaveLength(2);
+            expect(result.map(u => u.name)).toEqual(['Usuário 1', 'Usuário 2']);
+            expect(repo.list).toHaveBeenCalled();
+        });
     });
 
-    it('deve listar usuários', async () => {
-        await service.create({ name: 'Usuário 1' });
-        await service.create({ name: 'Usuário 2' });
+    describe('findById()', () => {
+        it('deve retornar um usuário existente', async () => {
+            const user: UserEntity = {
+                id: 1,
+                uuid: 'uuid-1',
+                name: 'Usuário 1',
+                is_active: true,
+                created_at: new Date(),
+                updated_at: new Date(),
+            };
+            (repo.findById as jest.Mock).mockResolvedValue(user);
 
-        const users = await service.list();
+            const result = await service.findById(1);
 
-        expect(users).toHaveLength(2);
-        expect(users.map(u => u.name)).toEqual(['Usuário 1', 'Usuário 2']);
+            expect(result).toEqual(user);
+            expect(repo.findById).toHaveBeenCalledWith(1);
+        });
+
+        it('deve lançar NotFoundException se o usuário não existir', async () => {
+            (repo.findById as jest.Mock).mockResolvedValue(null);
+
+            await expect(service.findById(999))
+                .rejects.toThrow(new NotFoundException('Usuário com id 999 não encontrada'));
+        });
     });
-
-    //   it('deve buscar um usuário pelo id', () => {
-    //     const created = service.create({ name: 'User', email: 'u@email.com', password: '123456' });
-
-    //     const found = service.findOne(created.id);
-    //     expect(found).toBeDefined();
-    //     expect(found?.id).toBe(created.id);
-    //   });
 });
