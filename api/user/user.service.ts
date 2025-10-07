@@ -10,4 +10,8 @@ export class UserService {
     async create(data: CreateDTO): Promise<UserEntity> {
         return await this.userRepository.create(data);
     }
+
+    async list() {
+        return await this.userRepository.list();
+    }
 }

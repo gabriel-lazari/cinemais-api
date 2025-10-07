@@ -16,4 +16,8 @@ export class UserRepository {
 
     return await this.ormRepo.save(user);
   }
+
+  async list(): Promise<UserEntity[]> {
+    return await this.ormRepo.find();
+  }
 }
