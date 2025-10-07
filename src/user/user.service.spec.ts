@@ -17,7 +17,7 @@ describe('UserService', () => {
                 name: dto.name,
                 is_active: true,
                 created_at: new Date(),
-                updated_at: new Date(),
+                updated_at: new Date()
             })),
             list: jest.fn().mockResolvedValue([
                 {
@@ -26,7 +26,7 @@ describe('UserService', () => {
                     name: 'Usuário 1',
                     is_active: true,
                     created_at: new Date(),
-                    updated_at: new Date(),
+                    updated_at: new Date()
                 },
                 {
                     id: 2,
