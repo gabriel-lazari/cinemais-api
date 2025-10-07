@@ -1,6 +1,6 @@
 import { Body, Controller, HttpCode, HttpStatus, Get, Param, Post, Delete } from '@nestjs/common';
 import { FavoriteService } from './favorite.service';
-import { CreateFavoriteDTO } from './dto/create.favorite.dto';
+import { CreateFavoriteDto } from './dto/create.favorite.dto';
 import { FavoriteEntity } from './favorite.entity';
 import { ApiOperation } from '@nestjs/swagger';
 
@@ -11,7 +11,7 @@ export class FavoriteController {
     @Post()
     @HttpCode(HttpStatus.NO_CONTENT)
     @ApiOperation({ summary: 'Adicionar filme/série ao favoritos do usuário' })
-    async create(@Param('userId') userId: string, @Body() dto: CreateFavoriteDTO): Promise<void> {
+    async create(@Param('userId') userId: string, @Body() dto: CreateFavoriteDto): Promise<void> {
         await this.favoriteService.create(+userId, dto);
     }
 

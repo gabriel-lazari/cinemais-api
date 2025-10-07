@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
 import { MediaRepository } from '../media/media.repository';
 import { FavoriteRepository } from './favorite.repository';
-import { UserRepository } from 'src/user/user.repository';
-import { CreateFavoriteDTO } from './dto/create.favorite.dto';
+import { UserRepository } from '../user/user.repository';
+import { CreateFavoriteDto } from './dto/create.favorite.dto';
 import { FavoriteEntity } from './favorite.entity';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class FavoriteService {
         private readonly favoriteRepository: FavoriteRepository
     ) { }
 
-    async create(userId: number, data: CreateFavoriteDTO): Promise<void> {
+    async create(userId: number, data: CreateFavoriteDto): Promise<void> {
         const user = await this.userRepository.findById(userId);
 
         if (!user) {
@@ -29,7 +29,7 @@ export class FavoriteService {
         const isExistFavorite = await this.favoriteRepository.existFavorite(userId, data.mediaId);
 
         if (isExistFavorite) {
-            throw new ConflictException(`Esse mídia com id ${data.mediaId} já é um favorito`);
+            throw new ConflictException(`Essa mídia com id ${data.mediaId} já é um favorito`);
         }
 
         await this.favoriteRepository.create(userId, data);
