@@ -27,7 +27,7 @@ export class FavoriteService {
         }
 
         const isExistFavorite = await this.favoriteRepository.existFavorite(userId, data.mediaId);
-        
+
         if (isExistFavorite) {
             throw new ConflictException(`Esse mídia com id ${data.mediaId} já é um favorito`);
         }
@@ -35,13 +35,13 @@ export class FavoriteService {
         await this.favoriteRepository.create(userId, data);
     }
 
-    async list(userId: number): Promise<FavoriteEntity[]>  {
+    async list(userId: number): Promise<FavoriteEntity[]> {
         return await this.favoriteRepository.list(userId);
     }
 
     async remove(userId: number, mediaId: number): Promise<void> {
         const isExistFavorite = await this.favoriteRepository.existFavorite(userId, mediaId);
-        
+
         if (!isExistFavorite) {
             throw new NotFoundException(`Não existe mídia ${mediaId} como favorito`);
         }

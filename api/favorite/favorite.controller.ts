@@ -1,6 +1,7 @@
 import { Body, Controller, HttpCode, HttpStatus, Get, Param, Post, Delete } from '@nestjs/common';
 import { FavoriteService } from './favorite.service';
 import { AddFavoriteDto } from './dto/addFavorite.dto';
+import { FavoriteEntity } from './favorite.entity';
 
 @Controller('user/:userId/favorites')
 export class FavoriteController {
@@ -8,12 +9,12 @@ export class FavoriteController {
 
     @Post()
     @HttpCode(HttpStatus.NO_CONTENT)
-    async create(@Param('userId') userId: string, @Body() dto: AddFavoriteDto) {
+    async create(@Param('userId') userId: string, @Body() dto: AddFavoriteDto): Promise<void> {
         await this.favoriteService.create(+userId, dto);
     }
 
     @Get()
-    async list(@Param('userId') userId: string) {
+    async list(@Param('userId') userId: string): Promise<FavoriteEntity[]> {
         return await this.favoriteService.list(+userId);
     }
 

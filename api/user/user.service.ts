@@ -11,11 +11,11 @@ export class UserService {
         return await this.userRepository.create(data);
     }
 
-    async list() {
+    async list(): Promise<UserEntity[]> {
         return await this.userRepository.list();
     }
 
-    async findById(id: number) {
+    async findById(id: number): Promise<UserEntity> {
         const user = await this.userRepository.findById(id);
 
         if (!user) {

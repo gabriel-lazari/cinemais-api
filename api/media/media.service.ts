@@ -11,11 +11,11 @@ export class MediaService {
         return await this.mediaRepository.create(data);
     }
 
-    async list() {
+    async list(): Promise<MediaEntity[]> {
         return await this.mediaRepository.list();
     }
 
-    async findById(id: number) {
+    async findById(id: number): Promise<MediaEntity> {
         const media = await this.mediaRepository.findById(id);
 
         if (!media) {
