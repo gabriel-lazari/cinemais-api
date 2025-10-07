@@ -8,7 +8,7 @@ import * as bodyParser from 'body-parser';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
-    .setTitle('API da Sky Teste')
+    .setTitle('Cinemais - Desáfio API da Sky')
     .setDescription('Documentação da API RESTful com NestJS + Swagger')
     .setVersion('1.0')
     .build();
@@ -32,7 +32,7 @@ async function bootstrap() {
 
   SwaggerModule.setup('api', app, document);
   
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(3000);
 }
 
 bootstrap();
