@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
 import { MediaRepository } from '../media/media.repository';
 import { FavoriteRepository } from './favorite.repository';
-import { UserRepository } from 'api/user/user.repository';
+import { UserRepository } from 'src/user/user.repository';
 import { CreateFavoriteDTO } from './dto/create.favorite.dto';
 import { FavoriteEntity } from './favorite.entity';
 

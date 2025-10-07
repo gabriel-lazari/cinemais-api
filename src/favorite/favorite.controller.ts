@@ -16,7 +16,7 @@ export class FavoriteController {
     }
 
     @Get()
-    @ApiOperation({ summary: 'Listar filmes/séries dos favoritos do usuário' })
+    @ApiOperation({ summary: 'Listar filmes/séries favoritos do usuário' })
     async list(@Param('userId') userId: string): Promise<FavoriteEntity[]> {
         return await this.favoriteService.list(+userId);
     }

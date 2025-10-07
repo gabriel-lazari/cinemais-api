@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDTO } from './dto/create.user.dto';
+import { CreateUserDto } from './dto/create.user.dto';
 import { UserEntity } from './user.entity';
 import { ApiOperation } from '@nestjs/swagger';
 
@@ -10,7 +10,7 @@ export class UserController {
 
     @Post()
     @ApiOperation({ summary: 'Cria um novo usuário' })
-    async create(@Body() dto: CreateUserDTO): Promise<UserEntity> {
+    async create(@Body() dto: CreateUserDto): Promise<UserEntity> {
         return await this.userService.create(dto);
     }
 

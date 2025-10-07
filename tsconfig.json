@@ -18,5 +18,5 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false
   },
-  "include": ["api/**/*.ts"]
+  "include": ["src/**/*.ts"]
 }
