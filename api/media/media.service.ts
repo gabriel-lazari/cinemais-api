@@ -1,13 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { MediaRepository } from './media.repository';
-import { CreateDTO } from './dto/create.dto';
+import { CreateMediaDTO } from './dto/create.media.dto';
 import { MediaEntity } from './media.entity';
 
 @Injectable()
 export class MediaService {
     constructor(private readonly mediaRepository: MediaRepository) { }
 
-    async create(data: CreateDTO): Promise<MediaEntity> {
+    async create(data: CreateMediaDTO): Promise<MediaEntity> {
         return await this.mediaRepository.create(data);
     }
 

@@ -2,7 +2,7 @@ import { Injectable, NotFoundException, ConflictException } from '@nestjs/common
 import { MediaRepository } from '../media/media.repository';
 import { FavoriteRepository } from './favorite.repository';
 import { UserRepository } from 'api/user/user.repository';
-import { AddFavoriteDto } from './dto/addFavorite.dto';
+import { CreateFavoriteDTO } from './dto/create.favorite.dto';
 import { FavoriteEntity } from './favorite.entity';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class FavoriteService {
         private readonly favoriteRepository: FavoriteRepository
     ) { }
 
-    async create(userId: number, data: AddFavoriteDto): Promise<void> {
+    async create(userId: number, data: CreateFavoriteDTO): Promise<void> {
         const user = await this.userRepository.findById(userId);
 
         if (!user) {

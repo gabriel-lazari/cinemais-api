@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MediaEntity } from './media.entity';
-import { CreateDTO } from './dto/create.dto';
+import { CreateMediaDTO } from './dto/create.media.dto';
 
 @Injectable()
 export class MediaRepository {
@@ -11,7 +11,7 @@ export class MediaRepository {
     private readonly ormRepo: Repository<MediaEntity>,
   ) { }
 
-  async create(data: CreateDTO): Promise<MediaEntity> {
+  async create(data: CreateMediaDTO): Promise<MediaEntity> {
     const media = this.ormRepo.create(data);
 
     return await this.ormRepo.save(media);
