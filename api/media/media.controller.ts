@@ -1,25 +1,15 @@
-import { Body, Controller, Post } from "@nestjs/common";
-import { MediaEntity } from "./media.entity";
-import { MediaRepository } from "./media.repository";
-import { CreateDTO } from "./dto/create.dto";
-import { MediaService } from "./media.service";
+import { Body, Controller, Get, Param, Post, Delete } from '@nestjs/common';
+import { MediaService } from './media.service';
+import { CreateDTO } from './dto/create.dto';
 
-@Controller('/media')
+@Controller('media')
 export class MediaController {
-    constructor(
-        private mediaRepository: MediaRepository,
-        private mediaService: MediaService
-    ) {};
-    
+    constructor(private readonly mediaService: MediaService) { }
+
     @Post()
-    async create(@Body() userData: CreateDTO) {
-        const mediaEntity = new MediaEntity();
+    async create(@Body() dto: CreateDTO) {
+        const mediaCreated = await this.mediaService.create(dto);
 
-        mediaEntity.name = userData.name;
-        mediaEntity.password = userData.password;
-
-        const mediaCreated = await this.mediaService.create(mediaEntity);
-
-        return { message: 'usuario criado com sucesso' };
+        return { message: 'Mídia criada com sucesso', data: mediaCreated };
     }
 }

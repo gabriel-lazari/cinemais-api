@@ -2,8 +2,17 @@ import { IsNotEmpty, MinLength } from "class-validator";
 
 export class CreateDTO {
     @IsNotEmpty() @MinLength(3)
-    name: string;
+    title: string;
 
-    @MinLength(6)
-    password: string;
+    @IsNotEmpty() @MinLength(3)
+    description: string;
+
+    @IsNotEmpty()
+    type: string;
+
+    @IsNotEmpty()
+    releaseYear: number;
+
+    @IsNotEmpty()
+    genre: string;
 }

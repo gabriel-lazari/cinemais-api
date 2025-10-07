@@ -1,19 +1,13 @@
-import { Injectable } from "@nestjs/common";
-import { Repository } from "typeorm";
-import { InjectRepository } from "@nestjs/typeorm";
-import { CreateDTO } from "./dto/create.dto";
-import { MediaEntity } from "./media.entity";
+import { Injectable } from '@nestjs/common';
+import { MediaRepository } from './media.repository';
+import { CreateDTO } from './dto/create.dto';
+import { MediaEntity } from './media.entity';
 
 @Injectable()
 export class MediaService {
-    constructor(
-        @InjectRepository(MediaEntity)
-        private readonly mediaRepository: Repository<MediaEntity>
-    ) {}
+    constructor(private readonly mediaRepository: MediaRepository) { }
 
-    async create(media: MediaEntity) {
-        const created = await this.mediaRepository.save(media);
-        
-        return created;
+    async create(data: CreateDTO): Promise<MediaEntity> {
+        return this.mediaRepository.create(data);
     }
 }

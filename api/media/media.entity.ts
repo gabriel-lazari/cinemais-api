@@ -1,19 +1,19 @@
-import { Entity, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, CreateDateColumn, UpdateDateColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: 'media' })
 export class MediaEntity {
     @PrimaryGeneratedColumn('increment')
     id: number
 
-    @PrimaryGeneratedColumn('uuid')
-    uuid: string
-
     @CreateDateColumn({ name: 'created_at' })
     created_at: string;
-
+    
     @UpdateDateColumn({ name: 'updated_at' })
     updated_at: string;
-
+    
+    @PrimaryGeneratedColumn('uuid')
+    uuid: string
+    
     @Column({ name: 'title', length: 100, nullable: false })
     title: string;
 
