@@ -20,4 +20,8 @@ export class UserRepository {
   async list(): Promise<UserEntity[]> {
     return await this.ormRepo.find();
   }
+
+  async findById(id: number): Promise<UserEntity | null> {
+    return this.ormRepo.findOne({ where: { id } });
+  }
 }
