@@ -8,8 +8,6 @@ export class MediaController {
 
     @Post()
     async create(@Body() dto: CreateDTO) {
-        const mediaCreated = await this.mediaService.create(dto);
-
-        return { message: 'Mídia criada com sucesso', data: mediaCreated };
+        return await this.mediaService.create(dto);
     }
 }

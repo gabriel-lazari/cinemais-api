@@ -8,6 +8,6 @@ export class MediaService {
     constructor(private readonly mediaRepository: MediaRepository) { }
 
     async create(data: CreateDTO): Promise<MediaEntity> {
-        return this.mediaRepository.create(data);
+        return await this.mediaRepository.create(data);
     }
 }
