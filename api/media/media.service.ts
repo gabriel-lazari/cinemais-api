@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { MediaRepository } from './media.repository';
 import { CreateDTO } from './dto/create.dto';
 import { MediaEntity } from './media.entity';
@@ -12,6 +12,16 @@ export class MediaService {
     }
 
     async list() {
-        return await this.mediaRepository.findAll();
+        return await this.mediaRepository.list();
+    }
+
+    async findById(id: number) {
+        const media = await this.mediaRepository.findById(id);
+
+        if (!media) {
+            throw new NotFoundException(`Mídia com id ${id} não encontrada`);
+        }
+
+        return media;
     }
 }

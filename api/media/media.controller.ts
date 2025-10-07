@@ -12,7 +12,12 @@ export class MediaController {
     }
 
     @Get()
-    async listAll() {
+    async list() {
         return await this.mediaService.list();
+    }
+
+    @Get(':id')
+    async findById(@Param('id') id: string) {
+        return await this.mediaService.findById(+id);
     }
 }

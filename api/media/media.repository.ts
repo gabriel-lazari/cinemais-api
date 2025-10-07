@@ -17,7 +17,11 @@ export class MediaRepository {
     return await this.ormRepo.save(media);
   }
 
-  async findAll(): Promise<MediaEntity[]> {
+  async list(): Promise<MediaEntity[]> {
     return await this.ormRepo.find();
+  }
+
+  async findById(id: number): Promise<MediaEntity | null> {
+    return this.ormRepo.findOne({ where: { id } });
   }
 }
