@@ -7,10 +7,10 @@ export class MediaEntity {
     id: number
 
     @CreateDateColumn({ name: 'created_at' })
-    created_at: string;
+    created_at: Date;
 
     @UpdateDateColumn({ name: 'updated_at' })
-    updated_at: string;
+    updated_at: Date;
     
     @Column()
     @Generated('uuid')

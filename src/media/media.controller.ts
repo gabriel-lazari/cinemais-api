@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { MediaService } from './media.service';
-import { CreateMediaDTO } from './dto/create.media.dto';
+import { CreateMediaDto } from './dto/create.media.dto';
 import { MediaEntity } from './media.entity';
 import { ApiOperation } from '@nestjs/swagger';
 
@@ -10,7 +10,7 @@ export class MediaController {
 
     @Post()
     @ApiOperation({ summary: 'Cria uma nova mídia' })
-    async create(@Body() dto: CreateMediaDTO): Promise<MediaEntity> {
+    async create(@Body() dto: CreateMediaDto): Promise<MediaEntity> {
         return await this.mediaService.create(dto);
     }
 
