@@ -1,15 +1,19 @@
+version: "3.9"
+
 services:
   api:
     build: .
     container_name: nest_api
     restart: always
     ports:
-      - "3000:3000"
+      - "${API_PORT}:3000"
     env_file:
       - .env
     depends_on:
       db:
         condition: service_healthy
+    networks:
+      - sky_network
 
   db:
     image: postgres:15
@@ -20,7 +24,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     ports:
-      - "${PORT}:5432"
+      - "${DB_PORT}:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
     healthcheck:
@@ -28,6 +32,12 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - sky_network
 
 volumes:
   db_data:
+
+networks:
+  sky_network:
+    driver: bridge
