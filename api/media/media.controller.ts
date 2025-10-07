@@ -10,4 +10,9 @@ export class MediaController {
     async create(@Body() dto: CreateDTO) {
         return await this.mediaService.create(dto);
     }
+
+    @Get()
+    async listAll() {
+        return await this.mediaService.list();
+    }
 }

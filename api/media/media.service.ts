@@ -10,4 +10,8 @@ export class MediaService {
     async create(data: CreateDTO): Promise<MediaEntity> {
         return await this.mediaRepository.create(data);
     }
+
+    async list() {
+        return await this.mediaRepository.findAll();
+    }
 }

@@ -9,11 +9,15 @@ export class MediaRepository {
   constructor(
     @InjectRepository(MediaEntity)
     private readonly ormRepo: Repository<MediaEntity>,
-  ) {}
+  ) { }
 
   async create(data: CreateDTO): Promise<MediaEntity> {
     const media = this.ormRepo.create(data);
-    
+
     return await this.ormRepo.save(media);
+  }
+
+  async findAll(): Promise<MediaEntity[]> {
+    return await this.ormRepo.find();
   }
 }
