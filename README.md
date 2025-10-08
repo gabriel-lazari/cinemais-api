@@ -30,7 +30,7 @@ O objetivo é construir uma **API RESTful** para gerenciar o catálogo de mídia
 ---
 
 ## ⚙️Como Rodar o Projeto
-### Rodar localmente (sem Docker)
+### 💻 Rodar localmente (sem Docker)
 ```js
 npm install
 npm run start:dev
