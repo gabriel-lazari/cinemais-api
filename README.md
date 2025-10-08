@@ -8,22 +8,25 @@ O objetivo é construir uma **API RESTful** para gerenciar o catálogo de mídia
 
 - **Node.js** com **TypeScript**
 - **Framework:** NestJS  
-  > Escolhi o **NestJS** por sua arquitetura modular, suporte nativo a TypeScript, injeção de dependências e facilidade em estruturar projetos escaláveis e bem organizados. Isso ajuda a manter boas práticas desde o início, mesmo em projetos pequenos.
+  > Escolhi o NestJS por sua arquitetura modular, suporte nativo a TypeScript, injeção de dependências e facilidade em estruturar projetos escaláveis e bem organizados. Isso ajuda a manter boas práticas desde o início, mesmo em projetos pequenos.
 - **Banco de Dados:** PostgreSQL (via Docker)  
   > Optei pelo PostgreSQL por ser um banco relacional robusto, amplamente utilizado no mercado e com ótimo suporte a queries complexas. Além disso, a integração com Docker facilita a configuração e execução em qualquer ambiente.
 - **Testes:** Jest
-  > Escolhi o **Jest** por sua integração nativa com TypeScript e NestJS, simplicidade na escrita de testes, suporte embutido a mocks, execução rápida em paralelo e relatórios de cobertura de código integrados. Isso garante produtividade e qualidade no desenvolvimento.
+  > Escolhi o Jest por sua integração nativa com TypeScript e NestJS, simplicidade na escrita de testes, suporte embutido a mocks, execução rápida em paralelo e relatórios de cobertura de código integrados. Isso garante produtividade e qualidade no desenvolvimento.
 - **Containerização:** Docker + Docker Compose
   > Utilizados para padronizar o ambiente de execução, simplificar a configuração e permitir que a aplicação e o banco de dados sejam orquestrados com um único comando (`docker-compose up`). Isso garante portabilidade e consistência entre diferentes ambientes.
-- **Qualidade de Código:** ESLint + Prettier  
+- **Qualidade de Código:** ESLint + Prettier
+  > O **ESLint** foi configurado para identificar e corrigir problemas de padrão e boas práticas no código, ajudando a manter consistência e evitar erros comuns em TypeScript/NestJS.  
+  > O **Prettier** é responsável pela formatação automática do código (quebra de linhas, indentação, aspas, etc.), garantindo legibilidade e padronização entre diferentes desenvolvedores.  
+  > Juntos, eles asseguram um código mais limpo, consistente e fácil de manter, reduzindo retrabalho e facilitando revisões.
 - **Tratamento de Erros:** Nativos do NestJS  
-  > Foi implementado um **tratamento de erros robusto e centralizado** utilizando filtros globais (`Exception Filters`) e a estrutura padrão do NestJS para garantir respostas consistentes e claras em toda a API.
+  > Foi implementado um tratamento de erros robusto e centralizado utilizando filtros globais (`Exception Filters`) e a estrutura padrão do NestJS para garantir respostas consistentes e claras em toda a API.
 - **Validação de Dados:** class-validator + Enums  
-  > Utilizados para validar **entities**, **DTOs**, garantindo integridade e consistência dos dados.  
+  > Utilizados para validar entities, DTOs, garantindo integridade e consistência dos dados.  
 - **Documentação da API:** Swagger 
   > Integrado para gerar automaticamente uma documentação interativa da API.  
   > Com o Swagger, é possível visualizar todos os endpoints, seus parâmetros, exemplos de requisição e resposta, além de testar as rotas diretamente pelo navegador em uma interface amigável. 
-  > A documentação estará disponível em: **http://localhost:3000/api**
+  > A documentação estará disponível em: http://localhost:3000/api
 ---
 
 ## ⚙️Como Rodar o Projeto
