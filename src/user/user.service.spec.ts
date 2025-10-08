@@ -17,7 +17,7 @@ describe('UserService', () => {
                 name: dto.name,
                 is_active: true,
                 created_at: new Date(),
-                updated_at: new Date()
+                updated_at: new Date(),
             })),
             list: jest.fn().mockResolvedValue([
                 {
@@ -26,7 +26,7 @@ describe('UserService', () => {
                     name: 'Usuário 1',
                     is_active: true,
                     created_at: new Date(),
-                    updated_at: new Date()
+                    updated_at: new Date(),
                 },
                 {
                     id: 2,
@@ -34,17 +34,14 @@ describe('UserService', () => {
                     name: 'Usuário 2',
                     is_active: true,
                     created_at: new Date(),
-                    updated_at: new Date()
-                }
+                    updated_at: new Date(),
+                },
             ]),
-            findById: jest.fn()
+            findById: jest.fn(),
         };
 
         const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                UserService,
-                { provide: UserRepository, useValue: repo }
-            ],
+            providers: [UserService, { provide: UserRepository, useValue: repo }],
         }).compile();
 
         service = module.get<UserService>(UserService);
@@ -67,7 +64,7 @@ describe('UserService', () => {
             const result = await service.list();
 
             expect(result).toHaveLength(2);
-            expect(result.map(u => u.name)).toEqual(['Usuário 1', 'Usuário 2']);
+            expect(result.map((u) => u.name)).toEqual(['Usuário 1', 'Usuário 2']);
             expect(repo.list).toHaveBeenCalled();
         });
     });
@@ -93,8 +90,9 @@ describe('UserService', () => {
         it('deve lançar NotFoundException se o usuário não existir', async () => {
             (repo.findById as jest.Mock).mockResolvedValue(null);
 
-            await expect(service.findById(999))
-                .rejects.toThrow(new NotFoundException('Usuário com id 999 não encontrada'));
+            await expect(service.findById(999)).rejects.toThrow(
+                new NotFoundException('Usuário com id 999 não encontrada'),
+            );
         });
     });
 });

@@ -8,8 +8,8 @@ import { MediaModule } from 'src/media/media.module';
 import { UserModule } from 'src/user/user.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([FavoriteEntity]), MediaModule, UserModule],
-  controllers: [FavoriteController],
-  providers: [FavoriteService, FavoriteRepository]
+    imports: [TypeOrmModule.forFeature([FavoriteEntity]), MediaModule, UserModule],
+    controllers: [FavoriteController],
+    providers: [FavoriteService, FavoriteRepository],
 })
-export class FavoriteModule { }
+export class FavoriteModule {}

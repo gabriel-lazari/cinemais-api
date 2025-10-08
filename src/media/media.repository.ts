@@ -6,22 +6,22 @@ import { CreateMediaDto } from './dto/create.media.dto';
 
 @Injectable()
 export class MediaRepository {
-  constructor(
-    @InjectRepository(MediaEntity)
-    private readonly ormRepo: Repository<MediaEntity>,
-  ) { }
+    constructor(
+        @InjectRepository(MediaEntity)
+        private readonly ormRepo: Repository<MediaEntity>,
+    ) {}
 
-  async create(data: CreateMediaDto): Promise<MediaEntity> {
-    const media = this.ormRepo.create(data);
+    async create(data: CreateMediaDto): Promise<MediaEntity> {
+        const media = this.ormRepo.create(data);
 
-    return await this.ormRepo.save(media);
-  }
+        return await this.ormRepo.save(media);
+    }
 
-  async list(): Promise<MediaEntity[]> {
-    return await this.ormRepo.find();
-  }
+    async list(): Promise<MediaEntity[]> {
+        return await this.ormRepo.find();
+    }
 
-  async findById(id: number): Promise<MediaEntity | null> {
-    return this.ormRepo.findOne({ where: { id } });
-  }
+    async findById(id: number): Promise<MediaEntity | null> {
+        return this.ormRepo.findOne({ where: { id } });
+    }
 }

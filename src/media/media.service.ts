@@ -5,7 +5,7 @@ import { MediaEntity } from './media.entity';
 
 @Injectable()
 export class MediaService {
-    constructor(private readonly mediaRepository: MediaRepository) { }
+    constructor(private readonly mediaRepository: MediaRepository) {}
 
     async create(data: CreateMediaDto): Promise<MediaEntity> {
         return await this.mediaRepository.create(data);

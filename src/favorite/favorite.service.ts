@@ -10,8 +10,8 @@ export class FavoriteService {
     constructor(
         private readonly userRepository: UserRepository,
         private readonly mediaRepository: MediaRepository,
-        private readonly favoriteRepository: FavoriteRepository
-    ) { }
+        private readonly favoriteRepository: FavoriteRepository,
+    ) {}
 
     async create(userId: number, data: CreateFavoriteDto): Promise<void> {
         const user = await this.userRepository.findById(userId);

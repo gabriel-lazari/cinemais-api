@@ -6,39 +6,39 @@ import { CreateFavoriteDto } from './dto/create.favorite.dto';
 
 @Injectable()
 export class FavoriteRepository {
-  constructor(
-    @InjectRepository(FavoriteEntity)
-    private readonly ormRepo: Repository<FavoriteEntity>,
-  ) { }
+    constructor(
+        @InjectRepository(FavoriteEntity)
+        private readonly ormRepo: Repository<FavoriteEntity>,
+    ) {}
 
-  async create(userId: number, data: CreateFavoriteDto): Promise<void> {
-    const favorite = this.ormRepo.create({
-      user: { id: userId },
-      media: { id: data.mediaId }
-    });
+    async create(userId: number, data: CreateFavoriteDto): Promise<void> {
+        const favorite = this.ormRepo.create({
+            user: { id: userId },
+            media: { id: data.mediaId },
+        });
 
-    await this.ormRepo.save(favorite);
-  }
+        await this.ormRepo.save(favorite);
+    }
 
-  async existFavorite(userId: number, mediaId: number): Promise<Boolean> {
-    const items = await this.ormRepo.find({
-      where: {
-        user: { id: userId },
-        media: { id: mediaId }
-      }
-    });
+    async existFavorite(userId: number, mediaId: number): Promise<Boolean> {
+        const items = await this.ormRepo.find({
+            where: {
+                user: { id: userId },
+                media: { id: mediaId },
+            },
+        });
 
-    return items.length > 0 ? true : false;
-  }
+        return items.length > 0 ? true : false;
+    }
 
-  async list(userId: number): Promise<FavoriteEntity[]> {
-    return await this.ormRepo.find({ where: { user: { id: userId } } });
-  }
+    async list(userId: number): Promise<FavoriteEntity[]> {
+        return await this.ormRepo.find({ where: { user: { id: userId } } });
+    }
 
-  async remove(userId: number, mediaId: number): Promise<void> {
-    await this.ormRepo.delete({
-      user: { id: userId },
-      media: { id: mediaId }
-    });
-  }
+    async remove(userId: number, mediaId: number): Promise<void> {
+        await this.ormRepo.delete({
+            user: { id: userId },
+            media: { id: mediaId },
+        });
+    }
 }

@@ -6,7 +6,7 @@ import { ApiOperation } from '@nestjs/swagger';
 
 @Controller('user')
 export class UserController {
-    constructor(private readonly userService: UserService) { }
+    constructor(private readonly userService: UserService) {}
 
     @Post()
     @ApiOperation({ summary: 'Cria um novo usuário' })

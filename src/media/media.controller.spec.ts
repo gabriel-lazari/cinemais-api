@@ -14,14 +14,12 @@ describe('MediaController', () => {
         const serviceMock: Partial<jest.Mocked<MediaService>> = {
             create: jest.fn(),
             list: jest.fn(),
-            findById: jest.fn()
+            findById: jest.fn(),
         };
 
         const module: TestingModule = await Test.createTestingModule({
             controllers: [MediaController],
-            providers: [
-                { provide: MediaService, useValue: serviceMock }
-            ]
+            providers: [{ provide: MediaService, useValue: serviceMock }],
         }).compile();
 
         controller = module.get<MediaController>(MediaController);
@@ -35,7 +33,7 @@ describe('MediaController', () => {
                 description: 'Descrição da mídia',
                 type: MediaType.MOVIE,
                 releaseYear: 2022,
-                genre: 'Ação'
+                genre: 'Ação',
             };
 
             const media: MediaEntity = {
@@ -44,7 +42,7 @@ describe('MediaController', () => {
                 ...dto,
                 is_active: true,
                 created_at: new Date(),
-                updated_at: new Date()
+                updated_at: new Date(),
             };
 
             service.create.mockResolvedValue(media);
@@ -69,7 +67,7 @@ describe('MediaController', () => {
                     genre: 'Ação',
                     is_active: true,
                     created_at: new Date(),
-                    updated_at: new Date()
+                    updated_at: new Date(),
                 },
                 {
                     id: 2,
@@ -81,8 +79,8 @@ describe('MediaController', () => {
                     genre: 'Drama',
                     is_active: true,
                     created_at: new Date(),
-                    updated_at: new Date()
-                }
+                    updated_at: new Date(),
+                },
             ];
 
             service.list.mockResolvedValue(medias);
@@ -106,7 +104,7 @@ describe('MediaController', () => {
                 genre: 'Ação',
                 is_active: true,
                 created_at: new Date(),
-                updated_at: new Date()
+                updated_at: new Date(),
             };
 
             service.findById.mockResolvedValue(media);
@@ -118,10 +116,11 @@ describe('MediaController', () => {
         });
 
         it('deve propagar NotFoundException lançado pelo service', async () => {
-            service.findById.mockRejectedValue(new NotFoundException('Mídia com id 999 não encontrada'));
+            service.findById.mockRejectedValue(
+                new NotFoundException('Mídia com id 999 não encontrada'),
+            );
 
-            await expect(controller.findById('999'))
-                .rejects.toThrow(NotFoundException);
+            await expect(controller.findById('999')).rejects.toThrow(NotFoundException);
         });
     });
 });

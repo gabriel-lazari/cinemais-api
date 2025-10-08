@@ -6,7 +6,7 @@ import { ApiOperation } from '@nestjs/swagger';
 
 @Controller('user/:userId/favorites')
 export class FavoriteController {
-    constructor(private readonly favoriteService: FavoriteService) { }
+    constructor(private readonly favoriteService: FavoriteService) {}
 
     @Post()
     @HttpCode(HttpStatus.NO_CONTENT)
@@ -24,7 +24,10 @@ export class FavoriteController {
     @Delete(':mediaId')
     @HttpCode(HttpStatus.NO_CONTENT)
     @ApiOperation({ summary: 'Remover filme/série ao favoritos do usuário' })
-    async remove(@Param('userId') userId: string, @Param('mediaId') mediaId: string): Promise<void> {
+    async remove(
+        @Param('userId') userId: string,
+        @Param('mediaId') mediaId: string,
+    ): Promise<void> {
         await this.favoriteService.remove(+userId, +mediaId);
     }
 }

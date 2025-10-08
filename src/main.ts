@@ -6,33 +6,33 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as bodyParser from 'body-parser';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  const config = new DocumentBuilder()
-    .setTitle('Cinemais - Desáfio API da Sky')
-    .setDescription('Documentação da API RESTful com NestJS + Swagger')
-    .setVersion('1.0')
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
+    const app = await NestFactory.create(AppModule);
+    const config = new DocumentBuilder()
+        .setTitle('Cinemais - Desáfio API da Sky')
+        .setDescription('Documentação da API RESTful com NestJS + Swagger')
+        .setVersion('1.0')
+        .build();
+    const document = SwaggerModule.createDocument(app, config);
 
-  app.use(bodyParser.json({ limit: '10mb' }));
-  app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
-  app.enableCors({
-    origin: ['http://localhost:8080'],
-  });
+    app.use(bodyParser.json({ limit: '10mb' }));
+    app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+    app.enableCors({
+        origin: ['http://localhost:8080'],
+    });
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      transform: true,
-      whitelist: true,
-      forbidNonWhitelisted: true
-    })
-  )
+    app.useGlobalPipes(
+        new ValidationPipe({
+            transform: true,
+            whitelist: true,
+            forbidNonWhitelisted: true,
+        }),
+    );
 
-  useContainer(app.select(AppModule), { fallbackOnErrors: true });
+    useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
-  SwaggerModule.setup('api', app, document);
-  
-  await app.listen(3000);
+    SwaggerModule.setup('api', app, document);
+
+    await app.listen(3000);
 }
 
 bootstrap();

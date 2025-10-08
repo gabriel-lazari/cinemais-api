@@ -17,10 +17,10 @@ describe('FavoriteController', () => {
                     useValue: {
                         create: jest.fn(),
                         list: jest.fn(),
-                        remove: jest.fn()
-                    }
-                }
-            ]
+                        remove: jest.fn(),
+                    },
+                },
+            ],
         }).compile();
 
         controller = module.get<FavoriteController>(FavoriteController);

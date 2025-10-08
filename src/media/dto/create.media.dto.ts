@@ -1,14 +1,19 @@
-import { IsNotEmpty, MinLength, IsEnum } from "class-validator";
+import { IsNotEmpty, MinLength, IsEnum } from 'class-validator';
 import { MediaType } from '../domain/media-type.enum';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateMediaDto {
     @ApiProperty({ example: 'Matrix', description: 'Nome de um filme/série' })
-    @IsNotEmpty() @MinLength(3)
+    @IsNotEmpty()
+    @MinLength(3)
     title: string;
 
-    @ApiProperty({ example: 'Um dev descobre que o mundo é uma simulação e precisa debugá-lo', description: 'Resumo do filme ou série' })
-    @IsNotEmpty() @MinLength(3)
+    @ApiProperty({
+        example: 'Um dev descobre que o mundo é uma simulação e precisa debugá-lo',
+        description: 'Resumo do filme ou série',
+    })
+    @IsNotEmpty()
+    @MinLength(3)
     description: string;
 
     @ApiProperty({ example: 'movie', description: 'movie/series' })

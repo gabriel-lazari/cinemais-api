@@ -56,16 +56,18 @@ describe('FavoriteService', () => {
         it('deve lançar NotFoundException se usuário não existir', async () => {
             userRepo.findById.mockResolvedValue(null);
 
-            await expect(service.create(1, dto))
-                .rejects.toThrow(new NotFoundException('Usuário 1 não existe'));
+            await expect(service.create(1, dto)).rejects.toThrow(
+                new NotFoundException('Usuário 1 não existe'),
+            );
         });
 
         it('deve lançar NotFoundException se mídia não existir', async () => {
             userRepo.findById.mockResolvedValue({ id: 1 } as any);
             mediaRepo.findById.mockResolvedValue(null);
 
-            await expect(service.create(1, dto))
-                .rejects.toThrow(new NotFoundException('Mídia com id 10 não encontrada no catálogo'));
+            await expect(service.create(1, dto)).rejects.toThrow(
+                new NotFoundException('Mídia com id 10 não encontrada no catálogo'),
+            );
         });
 
         it('deve lançar ConflictException se já for favorito', async () => {
@@ -73,8 +75,9 @@ describe('FavoriteService', () => {
             mediaRepo.findById.mockResolvedValue({ id: 10 } as any);
             favoriteRepo.existFavorite.mockResolvedValue(true);
 
-            await expect(service.create(1, dto))
-                .rejects.toThrow(new ConflictException('Essa mídia com id 10 já é um favorito'));
+            await expect(service.create(1, dto)).rejects.toThrow(
+                new ConflictException('Essa mídia com id 10 já é um favorito'),
+            );
         });
     });
 
@@ -106,8 +109,9 @@ describe('FavoriteService', () => {
         it('deve lançar NotFoundException se favorito não existir', async () => {
             favoriteRepo.existFavorite.mockResolvedValue(false);
 
-            await expect(service.remove(1, 10))
-                .rejects.toThrow(new NotFoundException('Não existe mídia 10 como favorito'));
+            await expect(service.remove(1, 10)).rejects.toThrow(
+                new NotFoundException('Não existe mídia 10 como favorito'),
+            );
         });
     });
 });

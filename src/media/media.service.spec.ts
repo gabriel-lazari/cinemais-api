@@ -35,7 +35,7 @@ describe('MediaService', () => {
                     genre: 'Ação',
                     is_active: true,
                     created_at: new Date(),
-                    updated_at: new Date()
+                    updated_at: new Date(),
                 },
                 {
                     id: 2,
@@ -47,17 +47,14 @@ describe('MediaService', () => {
                     genre: 'Drama',
                     is_active: true,
                     created_at: new Date(),
-                    updated_at: new Date()
+                    updated_at: new Date(),
                 },
             ]),
-            findById: jest.fn()
+            findById: jest.fn(),
         };
 
         const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                MediaService,
-                { provide: MediaRepository, useValue: repo }
-            ],
+            providers: [MediaService, { provide: MediaRepository, useValue: repo }],
         }).compile();
 
         service = module.get<MediaService>(MediaService);
@@ -70,7 +67,7 @@ describe('MediaService', () => {
                 description: 'Descrição da mídia',
                 type: MediaType.MOVIE,
                 releaseYear: 2022,
-                genre: 'Ação'
+                genre: 'Ação',
             };
 
             const result = await service.create(dto);
@@ -91,7 +88,7 @@ describe('MediaService', () => {
             const result = await service.list();
 
             expect(result).toHaveLength(2);
-            expect(result.map(m => m.title)).toEqual(['Mídia 1', 'Mídia 2']);
+            expect(result.map((m) => m.title)).toEqual(['Mídia 1', 'Mídia 2']);
             expect(repo.list).toHaveBeenCalled();
         });
     });
@@ -108,7 +105,7 @@ describe('MediaService', () => {
                 genre: 'Ação',
                 is_active: true,
                 created_at: new Date(),
-                updated_at: new Date()
+                updated_at: new Date(),
             };
             (repo.findById as jest.Mock).mockResolvedValue(media);
 
@@ -121,8 +118,9 @@ describe('MediaService', () => {
         it('deve lançar NotFoundException se a mídia não existir', async () => {
             (repo.findById as jest.Mock).mockResolvedValue(null);
 
-            await expect(service.findById(999))
-                .rejects.toThrow(new NotFoundException('Mídia com id 999 não encontrada'));
+            await expect(service.findById(999)).rejects.toThrow(
+                new NotFoundException('Mídia com id 999 não encontrada'),
+            );
         });
     });
 });
